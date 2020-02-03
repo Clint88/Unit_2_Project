@@ -5,8 +5,8 @@
    Tutorial 10
    Case Problem 4
 
-   Author: 
-   Date:   
+   Author: Clint Crockett
+   Date:   Feb 3
    
    Filename: vw_results.js
    
