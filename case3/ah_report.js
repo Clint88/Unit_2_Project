@@ -6,7 +6,7 @@
    Case Problem 3
 
    Author:  Clint Crockett
-   Date:   Feb 3
+   Date:   Feb 4
    
    Filename: ah_report.js
    
@@ -27,14 +27,37 @@
       information for the donor
       
 */
+var donationTotal = 0;
+
+//this will calculate the sum for each donation
+donors.forEach(calcSum);
 
 
+var summaryTable = "<table>"
+summaryTable += "<tr><th>Donors</th><td>" + donors.length + "</td></tr>";
+//displays the total of all donations
+summaryTable += "<tr><th>Total Donations</th><td>$" + donationTotal.toLocaleString() + "</td></tr>";
+summaryTable += "</table>";
 
+document.getElementById("donationSummary").innerHTML = summaryTable;
+//this will find all major donors to display
+var majorDonors = donors.filter(findMajorDonors);
+//this will order them greatest to least
+majorDonors.sort(donorSortDescending);
 
+var donorTable = "<table>";
+donorTable += "<caption>Major Donors</caption>";
+donorTable += "<tr>";
+donorTable += "<th>Donation</th><th>Donor</th>";
+donorTable += "<th>Date</th><th>Name</th><th>Address</th>";
+donorTable += "<th>Phone</th><th>E-mail</th>";
+donorTable += "</tr>";
 
+majorDonors.forEach(writeDonorRow);
 
+donorTable += "</table>"
 
-
+document.getElementById("donorTable").innerHTML = donorTable;
 
 
 function calcSum(donorAmt) {
@@ -60,4 +83,5 @@ function writeDonorRow(value) {
    donorTable += "<td>" + value[8] + "</td>";         
    donorTable += "</tr>";
 }
+
 
