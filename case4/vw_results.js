@@ -26,6 +26,7 @@
 var reportHTML = "<h1>" + raceTitle + "</h1>";
 for(var i = 0; i<race.length; i++){
    var totalVotes = 0;
+   //this will calculate the votes
    votes[i].forEach(calcSum);
    reportHTML += "<table>";
    reportHTML += "<caption>" + race[i] + "</caption>";
@@ -42,11 +43,13 @@ function candidateRows(raceNum, totalVotes){
       var candidateName = candidate[i][j];
       var candidateParty = party[i][j];
       var candidateVotes = votes[i][j];
+      //this will tell the k array how to find the graph percent
       var candidatePercent = calcPercent(candidateVotes, totalVotes);
 
       rowHTML += "<tr>";
       rowHTML += "<td>" + candidateName + " (" + candidateParty + ")</td>";
       rowHTML += "<td>" + candidateVotes.toLocaleString() + " (" + candidatePercent.toFixed(1) + ") </td>";
+      //this will calculate the percent for the graphs
       for(var k = 0; k<candidatePercent; k++){
          rowHTML += createBar(candidateParty);
       }
@@ -66,7 +69,7 @@ function calcPercent(value, sum) {
    return (100*value/sum);
 }
 
-
+// this function will create the bar graphs
 function createBar(partyType){
    var barHTML = "";
    //these will test for the party type
