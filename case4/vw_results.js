@@ -26,18 +26,18 @@
 var reportHTML = "<h1>" + raceTitle + "</h1>";
 for(var i = 0; i<race.length; i++){
    var totalVotes = 0;
-   [i].forEach(calcSum);
+   votes[i].forEach(calcSum);
    reportHTML += "<table>";
    reportHTML += "<caption>" + race[i] + "</caption>";
    reportHTML += "<tr><th>Candidate</th><th>Votes</th></tr>";
-   reportHTML += candidateRows([i], totalVotes);
+   reportHTML += candidateRows(i, totalVotes);
    reportHTML += "</table>";
 }
 
 document.getElementsByTagName("section")[0].innerHTML = reportHTML;
 
 function candidateRows(raceNum, totalVotes){
-   var rowHTML = " ";
+   var rowHTML = "";
    for(var j = 0; j<3; j++){
       var candidateName = candidate[i][j];
       var candidateParty = party[i][j];
@@ -47,8 +47,8 @@ function candidateRows(raceNum, totalVotes){
       rowHTML += "<tr>";
       rowHTML += "<td>" + candidateName + " (" + candidateParty + ")</td>";
       rowHTML += "<td>" + candidateVotes.toLocaleString() + " (" + candidatePercent.toFixed(1) + ") </td>";
-      for(var k = 0; k<candidatePercent.value; k++){
-         createBar(candidateParty, candidatePercent);
+      for(var k = 0; k<candidatePercent; k++){
+         rowHTML += createBar(candidateParty);
       }
       rowHTML += "</tr>";
    }
@@ -68,14 +68,15 @@ function calcPercent(value, sum) {
 
 
 function createBar(partyType){
+   var barHTML = "";
    //these will test for the party type
    if(partyType === "D"){
       barHTML = "<td class='dem'></td>";
    }
-   if(partyType === "R"){
+   else if(partyType === "R"){
       barHTML = "<td class='rep'></td>";
    }
-   if(partyType === "I"){
+   else if(partyType === "I"){
       barHTML = "<td class='ind'></td>";
    }
    return barHTML;
